@@ -34,10 +34,10 @@ TEST_CASE( "board size is valid", "[board]" ) {
     REQUIRE(sqrt(boardSize)*sqrt(boardSize) == boardSize);
 }
 
-TEST_CASE( "board prints", "[board]" ) {
+/*TEST_CASE( "board prints", "[board]" ) {
     // check that printBoard doesn't throw any exceptions
     REQUIRE_NOTHROW(board.printBoard(board));
-}
+}*/
 
 TEST_CASE( "make sure there are alive cells", "[board]" ) {
     REQUIRE_NOTHROW(board.countAliveCells(board));
@@ -49,14 +49,14 @@ TEST_CASE( "count neighbors runs", "[board]" ) {
     //upper left corner
     REQUIRE_NOTHROW(board.countAliveNeighbors(board, 0));
     //lower left corner
-    REQUIRE_NOTHROW(board.countAliveNeighbors(board, boardSize-sq));   //*****
+    REQUIRE_NOTHROW(board.countAliveNeighbors(board, boardSize-sq));
     //upper right corner
     REQUIRE_NOTHROW(board.countAliveNeighbors(board, 0+sq-1));
     //lower right corner
     REQUIRE_NOTHROW(board.countAliveNeighbors(board, boardSize-1));
     if(boardSize > 4) {
         //left edge
-        REQUIRE_NOTHROW(board.countAliveNeighbors(board, 0+sq));  //*****
+        REQUIRE_NOTHROW(board.countAliveNeighbors(board, 0+sq));
         //right edge
         REQUIRE_NOTHROW(board.countAliveNeighbors(board, 0+sq+sq-1));
         //middle
@@ -64,19 +64,29 @@ TEST_CASE( "count neighbors runs", "[board]" ) {
     }
 }
 
-/*TEST_CASE( "next generation stays the same size", "[game]" ) {
-    nextGenBoard = game.nextGen(board);
+TEST_CASE( "next generations", "[game]" ) {
+    int genCount = game.getGenCount();
+    Board nextGenBoard = game.runGens(board, genCount);
     REQUIRE(board.getBoardSize(nextGenBoard) == board.getBoardSize(board));
-}*/
-
-TEST_CASE( "***haven't decided on a name here yet***", "[game]" ) {
     
 }
 
-TEST_CASE( "Factorials are computed", "[factorial]" ) {
-    REQUIRE(game.Factorial(0) == 1 );
-    REQUIRE(game.Factorial(1) == 1 );
-    REQUIRE(game.Factorial(2) == 2 );
-    REQUIRE(game.Factorial(3) == 6 );
-    REQUIRE(game.Factorial(10) == 3628800 );
+TEST_CASE( "test board", "[board]" ) {
+    Game testGame;
+    Board testBoard;
+    testBoard.boardSize = 9;
+    int boardSize = testBoard.boardSize;
+    int sq = sqrt(boardSize);
+    testBoard.boardValues = {1, 1, 0, 1, 1, 1, 0, 0, 0};
+    //testBoard.printBoard(testBoard);
+    REQUIRE(testBoard.countAliveCells(testBoard) == 5);
+    REQUIRE(testBoard.countAliveNeighbors(testBoard, 0) == 3);
+    REQUIRE(testBoard.countAliveNeighbors(testBoard, boardSize-sq) == 2);
+    REQUIRE(testBoard.countAliveNeighbors(testBoard, 0+sq-1) == 3);
+    REQUIRE(testBoard.countAliveNeighbors(testBoard, boardSize-1) == 2);
+    if(boardSize > 4) {
+        REQUIRE(testBoard.countAliveNeighbors(testBoard, 0+sq) == 3);
+        REQUIRE(testBoard.countAliveNeighbors(testBoard, 0+sq+sq-1) == 2);
+        REQUIRE(testBoard.countAliveNeighbors(testBoard, boardSize/2) == 4);
+    }
 }

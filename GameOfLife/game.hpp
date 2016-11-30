@@ -13,8 +13,9 @@
 
 class Game {
 public:
-    unsigned int Factorial(unsigned int number);
     Board nextGen(Board& board);
+    int getGenCount();
+    Board runGens(Board& board, int genCount);
 };
 
 

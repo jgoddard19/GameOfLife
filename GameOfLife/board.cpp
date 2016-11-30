@@ -61,7 +61,8 @@ int Board :: countAliveCells(Board& board) {
     if(aliveCellCount <= 0) {
         throw "Error. Board is Dead, mismatch.";
     }
-    printf("Total alive cells on board: %d\n", aliveCellCount);
+    //**** bug checking print statement
+    //printf("Total alive cells on board: %d\n", aliveCellCount);
     return aliveCellCount;
 }
 
@@ -117,16 +118,22 @@ int Board :: countAliveNeighbors(Board& board, int loc) {
     // left
     if(loc == 0) {
         //loc is upper left corner
-        if(board.checkAlive(board, loc+1) == 1) {
+        if(board.checkAlive(board, loc+1)) {
             aliveNeighborCount++;
         }
-        if(board.checkAlive(board, loc+sq) == 1) {
+        if(board.checkAlive(board, loc+sq)) {
+            aliveNeighborCount++;
+        }
+        if(board.checkAlive(board, loc+sq+1)) {
             aliveNeighborCount++;
         }
     }
     else if(loc == board.boardSize-sq) {
         //loc is lower left corner
         if(board.checkAlive(board, loc-sq)) {
+            aliveNeighborCount++;
+        }
+        if(board.checkAlive(board, loc-sq+1)) {
             aliveNeighborCount++;
         }
         if(board.checkAlive(board, loc+1)) {
@@ -160,10 +167,16 @@ int Board :: countAliveNeighbors(Board& board, int loc) {
         if(board.checkAlive(board, loc+sq)) {
             aliveNeighborCount++;
         }
+        if(board.checkAlive(board, loc+sq-1)) {
+            aliveNeighborCount++;
+        }
     }
     else if(loc == board.boardSize-1) {
         //loc is lower right corner
         if(board.checkAlive(board, loc-sq)) {
+            aliveNeighborCount++;
+        }
+        if(board.checkAlive(board, loc-sq-1)) {
             aliveNeighborCount++;
         }
         if(board.checkAlive(board, loc-1)) {
@@ -191,30 +204,28 @@ int Board :: countAliveNeighbors(Board& board, int loc) {
     } else {
         //loc isn't on an edge
         for(int i=-1; i<2; i++) {
-            //if(board.boardValues[loc-sq+i] == NULL) {
-            
-            //}
-            if(board.boardValues[loc-sq+i] == 1 /*&& loc-sq+i != loc+1 && loc-sq+i != loc-1 && loc-sq+i != loc*/) {
-                aliveNeighborCount+=1;
-                //printf("Alive neighbor location1: %d, i: %d\n", (loc-sq+i), i);
-            }
-            if(board.boardValues[loc+sq+i] == 1 /*&& loc+sq+i != loc+1 && loc+sq+i != loc-1 && loc+sq+i != loc && loc+sq+i != loc-sq+i*/) {
-                aliveNeighborCount+=1;
-                //printf("Alive neighbor location4: %d, i: %d\n", (loc+sq+i), i);
-            }
-            if(board.checkAlive(board, loc-1)) {
+            if(board.checkAlive(board, loc-sq+i)) {
                 aliveNeighborCount++;
             }
-            if(board.checkAlive(board, loc+1)) {
+            if(board.checkAlive(board, loc+sq+i)) {
                 aliveNeighborCount++;
             }
+        }
+        if(board.checkAlive(board, loc-1)) {
+            aliveNeighborCount++;
+        }
+        if(board.checkAlive(board, loc+1)) {
+            aliveNeighborCount++;
         }
     }
     
     /*if(board.boardValues[loc] == 1) {
         aliveNeighborCount++;
     }*/
-    printf("Alive neighbors for cell %d: %d\n", loc, aliveNeighborCount);
+    
+    //**** bug checking print statement
+    //printf("Alive neighbors for cell %d: %d\n", loc, aliveNeighborCount);
+    
     return aliveNeighborCount;
 }
 
