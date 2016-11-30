@@ -64,6 +64,8 @@ TEST_CASE( "count neighbors runs", "[board]" ) {
     }
 }
 
+//TODO: better test cases for generations. maybe modularize (?) the runGens function if it isn't easy to test now
+
 TEST_CASE( "next generations", "[game]" ) {
     int genCount = game.getGenCount();
     Board nextGenBoard = game.runGens(board, genCount);

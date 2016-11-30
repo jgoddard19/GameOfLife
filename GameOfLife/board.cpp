@@ -28,7 +28,8 @@ int Board :: getBoardSize(Board& board) {
 }
 
 void Board :: fillBoard(Board& board) {
-    cout << "Filling board\n";
+    //**** bug checking print statement
+    //cout << "Filling board\n";
     for(int i=0; i<board.boardSize; i++) {
         int randNum = rand() % 2;
         board.boardValues.push_back(randNum);
@@ -78,6 +79,7 @@ bool Board :: checkAlive(Board& board, int loc) {
 int Board :: countAliveNeighbors(Board& board, int loc) {
     int aliveNeighborCount = 0;
     int sq = int(sqrt(board.boardSize));
+    //**** bug checking print statement
     //printf("Counting alive cells for location: %d\n", loc);
     /*
      1 1 1

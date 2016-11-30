@@ -71,6 +71,10 @@ Board Game :: runGens(Board& board, int genCount) {
     board.printBoard(board);
     for(int i=0; i<genCount; i++) {
         nextGenBoard = nextGen(board);
+        if(nextGenBoard.countAliveCells(nextGenBoard) == 0) {
+            cout << "All cells died\n";
+            i = genCount-1;
+        }
         board = nextGenBoard;
         cout << "------------\n";
         if(i == genCount-1) {
