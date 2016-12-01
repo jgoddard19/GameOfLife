@@ -82,6 +82,8 @@ int Board :: countAliveNeighbors(Board& board, int loc) {
     //**** bug checking print statement
     //printf("Counting alive cells for location: %d\n", loc);
     /*
+     
+     [111010001]
      1 1 1
      0 1 0
      0 0 1

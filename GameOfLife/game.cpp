@@ -37,7 +37,7 @@ Board Game :: nextGen(Board& board) {
                 //printf("cell %d flagged\n", i);
                 flagged.push_back(i);
             }
-        } else {
+        } else if(aliveNeighbors == 3) {
             //cell is dead
             //printf("cell %d flagged\n", i);
             flagged.push_back(i);
